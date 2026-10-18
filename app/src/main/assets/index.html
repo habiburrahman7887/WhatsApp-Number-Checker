@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WhatsApp Number Checker</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>WhatsApp Number Checker</h1>
+  <p class="sub">Open the WhatsApp chat yourself to check the number, then use the risk meter to judge the owner.</p>
+
+  <section class="card">
+    <label for="cc">Country code</label>
+    <select id="cc"></select>
+    <label for="num">Phone number</label>
+    <input id="num" type="tel" inputmode="tel" placeholder="e.g. 01712 345678 or +1 202 555 0100" autocomplete="off">
+    <p class="note" id="note"></p>
+    <button id="go" type="button">Check number</button>
+    <p class="msg" id="msg" role="alert"></p>
+  </section>
+
+  <section class="card" id="result" hidden>
+    <div class="label">Number to message</div>
+    <div class="num" id="formatted"></div>
+    <div class="banner bad" id="listed" hidden>This number is in your Scammer List. Be careful.</div>
+    <a class="btn" id="open" target="_blank" rel="noopener">Open WhatsApp chat</a>
+    <button class="ghost" id="copy" type="button">Copy number</button>
+    <p class="hint">If WhatsApp says the number is invalid, that number does not have WhatsApp.</p>
+  </section>
+
+  <section class="card meter" id="meter" hidden>
+    <svg viewBox="0 0 400 230" role="img" aria-label="Risk meter">
+      <path class="seg" d="M30,200 A170,170 0 0 1 52.78,115 L109.07,147.5 A105,105 0 0 0 95,200 Z" fill="#66bb2a" stroke="#fff" stroke-width="3"/>
+      <path class="seg" d="M52.78,115 A170,170 0 0 1 115,52.78 L147.5,109.07 A105,105 0 0 0 109.07,147.5 Z" fill="#92b923" stroke="#fff" stroke-width="3"/>
+      <path class="seg" d="M115,52.78 A170,170 0 0 1 200,30 L200,95 A105,105 0 0 0 147.5,109.07 Z" fill="#f2e645" stroke="#fff" stroke-width="3"/>
+      <path class="seg" d="M200,30 A170,170 0 0 1 285,52.78 L252.5,109.07 A105,105 0 0 0 200,95 Z" fill="#feb000" stroke="#fff" stroke-width="3"/>
+      <path class="seg" d="M285,52.78 A170,170 0 0 1 347.22,115 L290.93,147.5 A105,105 0 0 0 252.5,109.07 Z" fill="#e65a00" stroke="#fff" stroke-width="3"/>
+      <path class="seg" d="M347.22,115 A170,170 0 0 1 370,200 L305,200 A105,105 0 0 0 290.93,147.5 Z" fill="#cc2a1e" stroke="#fff" stroke-width="3"/>
+      <g class="needle" id="needle"><polygon points="200,196 200,204 104,200" fill="#2b2f2d"/></g>
+      <circle cx="200" cy="200" r="12" fill="#fff" stroke="#2b2f2d" stroke-width="6"/>
+    </svg>
+    <div class="score" id="score">0</div>
+    <span class="level" id="level">Very low</span>
+    <div class="checks">
+      <label><input type="checkbox" class="flag" id="f-adv"> Asks for advance or upfront payment (+25)</label>
+      <label><input type="checkbox" class="flag" id="f-otp"> Asks for OTP, PIN or password (+30)</label>
+      <label><input type="checkbox" class="flag" id="f-app"> Wants to move to another app, e.g. Telegram (+15)</label>
+      <label><input type="checkbox" class="flag" id="f-urg"> Pushes urgency, e.g. "decide today" (+15)</label>
+      <label><input type="checkbox" class="flag" id="f-noid"> Won't share name, business or address (+15)</label>
+      <label><input type="checkbox" class="flag" id="f-deal"> Offer sounds too good to be true (+15)</label>
+    </div>
+    <p class="disc">This meter cannot tell whether someone is a scammer. It only scores the signs you tick. Verify the person before paying anything.</p>
+    <p class="disc" style="text-align:center">Tap Scammer to save this number to your Scammer List. Tap again to remove it.</p>
+    <button type="button" class="scam-btn" id="scam-btn" aria-pressed="false">Scammer</button>
+  </section>
+
+  <section class="card" id="list-card">
+    <div class="list-head"><h2>Scammer List</h2><span class="label" id="list-count"></span></div>
+    <p class="hint">Numbers you mark as Scammer are saved in this browser only.</p>
+    <div id="list"></div>
+    <p class="empty" id="list-empty">No numbers saved yet.</p>
+  </section>
+</main>
+<script src="countries.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
